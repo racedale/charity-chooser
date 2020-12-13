@@ -17,24 +17,24 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const response = await axios.get(`https://url.com`, {
-    headers: {
-      "x-api-key": process.env.API_KEY,
-    },
-  });
-  const data = response.data;
-  // const data = mockData;
+// export async function getServerSideProps(context) {
+//   const response = await axios.get(`https://url.com`, {
+//     headers: {
+//       "x-api-key": process.env.API_KEY,
+//     },
+//   });
+//   const data = response.data;
+//   // const data = mockData;
 
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
+//   if (!data) {
+//     return {
+//       notFound: true,
+//     };
+//   }
 
-  return {
-    props: {
-      data,
-    }, // will be passed to the page component as props
-  };
-}
+//   return {
+//     props: {
+//       data,
+//     }, // will be passed to the page component as props
+//   };
+// }

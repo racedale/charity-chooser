@@ -1,9 +1,5 @@
 [build]
-  command = "npx @aws-amplify/cli init --yes --amplify "{\
-\"projectName\":\"charitychooser\",\
-\"envName\":\"dev\",\
-\"defaultEditor\":\"code\"\
-}" && npm run build"
+  command = "npx @aws-amplify/cli init --yes --amplify "{\"projectName\":\"charitychooser\",\"envName\":\"dev\",\"defaultEditor\":\"code\"}" && npm run build"
   functions = "functions/"
 
 [[plugins]]

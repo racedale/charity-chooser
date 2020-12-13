@@ -1,5 +1,5 @@
 [build]
-  command = "cd functions && npm ci && cd .. && npm run build"
+  command = "npx @aws-amplify/cli init --yes && npm run build"
   functions = "functions/"
 
 [[plugins]]

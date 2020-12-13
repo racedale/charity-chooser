@@ -43,3 +43,8 @@ table tr:nth-child(odd) {
   justify-content: center;
   align-items: center;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr [first] 1fr [second] 1fr [third];
+}

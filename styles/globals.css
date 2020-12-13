@@ -26,25 +26,11 @@ code {
   font-family: Menlo, Monaco, Lucida Console, Courier New, monospace;
 }
 
-table th,
-table td {
-  padding: 0.25rem 0.5rem;
-  text-align: right;
-}
-
-table tr:nth-child(odd) {
-  background-color: #eee;
-}
-
 .container {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr [first] 1fr [second] 1fr [third];
+  background: #235e6f;
 }

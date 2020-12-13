@@ -1,3 +1,9 @@
-export default function Header({ title }) {
-  return <h1 className="title">{title}</h1>
+import { Heading } from "@chakra-ui/react";
+
+export default function Header(props) {
+  return (
+    <Heading as="h1" className="title" {...props}>
+      {props.title}
+    </Heading>
+  );
 }

@@ -3,3 +3,17 @@ type Charity @model {
   name: String!
   description: String
 }
+
+type Person @model {
+  id: ID!
+  name: String!
+  email: String
+  allocation: Int
+}
+
+type Choice @model {
+  id: ID!
+  charity: Charity @connection
+  person: Person! @connection
+  cost: Int!
+}

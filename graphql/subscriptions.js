@@ -34,3 +34,114 @@ export const onDeleteCharity = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePerson = /* GraphQL */ `
+  subscription OnCreatePerson {
+    onCreatePerson {
+      id
+      name
+      email
+      allocation
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePerson = /* GraphQL */ `
+  subscription OnUpdatePerson {
+    onUpdatePerson {
+      id
+      name
+      email
+      allocation
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePerson = /* GraphQL */ `
+  subscription OnDeletePerson {
+    onDeletePerson {
+      id
+      name
+      email
+      allocation
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateChoice = /* GraphQL */ `
+  subscription OnCreateChoice {
+    onCreateChoice {
+      id
+      charity {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+      }
+      person {
+        id
+        name
+        email
+        allocation
+        createdAt
+        updatedAt
+      }
+      cost
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateChoice = /* GraphQL */ `
+  subscription OnUpdateChoice {
+    onUpdateChoice {
+      id
+      charity {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+      }
+      person {
+        id
+        name
+        email
+        allocation
+        createdAt
+        updatedAt
+      }
+      cost
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteChoice = /* GraphQL */ `
+  subscription OnDeleteChoice {
+    onDeleteChoice {
+      id
+      charity {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+      }
+      person {
+        id
+        name
+        email
+        allocation
+        createdAt
+        updatedAt
+      }
+      cost
+      createdAt
+      updatedAt
+    }
+  }
+`;

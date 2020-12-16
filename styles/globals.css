@@ -17,6 +17,8 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 75rem;
+  margin: 0 auto;
 }
 
 code {

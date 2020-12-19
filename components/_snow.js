@@ -1,6 +1,6 @@
 // Snow from https://codepen.io/radum/pen/xICAB
 export function snow() {
-  let COUNT = 200;
+  let COUNT = 100;
   let masthead = document.querySelector(".sky");
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");

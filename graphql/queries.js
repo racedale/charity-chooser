@@ -7,6 +7,7 @@ export const getCharity = /* GraphQL */ `
       id
       name
       description
+      ein
       createdAt
       updatedAt
     }
@@ -23,6 +24,7 @@ export const listCharitys = /* GraphQL */ `
         id
         name
         description
+        ein
         createdAt
         updatedAt
       }
@@ -37,6 +39,28 @@ export const getPerson = /* GraphQL */ `
       name
       email
       allocation
+      choice {
+        id
+        charity {
+          id
+          name
+          description
+          ein
+          createdAt
+          updatedAt
+        }
+        person {
+          id
+          name
+          email
+          allocation
+          createdAt
+          updatedAt
+        }
+        cost
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -54,6 +78,12 @@ export const listPersons = /* GraphQL */ `
         name
         email
         allocation
+        choice {
+          id
+          cost
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -69,6 +99,7 @@ export const getChoice = /* GraphQL */ `
         id
         name
         description
+        ein
         createdAt
         updatedAt
       }
@@ -77,6 +108,12 @@ export const getChoice = /* GraphQL */ `
         name
         email
         allocation
+        choice {
+          id
+          cost
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -99,6 +136,7 @@ export const listChoices = /* GraphQL */ `
           id
           name
           description
+          ein
           createdAt
           updatedAt
         }

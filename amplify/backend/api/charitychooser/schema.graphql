@@ -2,6 +2,7 @@ type Charity @model {
   id: ID!
   name: String!
   description: String
+  ein: String
 }
 
 type Person @model {
@@ -9,10 +10,11 @@ type Person @model {
   name: String!
   email: String
   allocation: Int
+  choice: Choice @connection
 }
 
 type Choice @model {
-  id: ID!
+  id: ID
   charity: Charity @connection
   person: Person! @connection
   cost: Int!

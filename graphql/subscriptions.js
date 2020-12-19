@@ -7,6 +7,7 @@ export const onCreateCharity = /* GraphQL */ `
       id
       name
       description
+      ein
       createdAt
       updatedAt
     }
@@ -18,6 +19,7 @@ export const onUpdateCharity = /* GraphQL */ `
       id
       name
       description
+      ein
       createdAt
       updatedAt
     }
@@ -29,6 +31,7 @@ export const onDeleteCharity = /* GraphQL */ `
       id
       name
       description
+      ein
       createdAt
       updatedAt
     }
@@ -41,6 +44,28 @@ export const onCreatePerson = /* GraphQL */ `
       name
       email
       allocation
+      choice {
+        id
+        charity {
+          id
+          name
+          description
+          ein
+          createdAt
+          updatedAt
+        }
+        person {
+          id
+          name
+          email
+          allocation
+          createdAt
+          updatedAt
+        }
+        cost
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -53,6 +78,28 @@ export const onUpdatePerson = /* GraphQL */ `
       name
       email
       allocation
+      choice {
+        id
+        charity {
+          id
+          name
+          description
+          ein
+          createdAt
+          updatedAt
+        }
+        person {
+          id
+          name
+          email
+          allocation
+          createdAt
+          updatedAt
+        }
+        cost
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -65,6 +112,28 @@ export const onDeletePerson = /* GraphQL */ `
       name
       email
       allocation
+      choice {
+        id
+        charity {
+          id
+          name
+          description
+          ein
+          createdAt
+          updatedAt
+        }
+        person {
+          id
+          name
+          email
+          allocation
+          createdAt
+          updatedAt
+        }
+        cost
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -78,6 +147,7 @@ export const onCreateChoice = /* GraphQL */ `
         id
         name
         description
+        ein
         createdAt
         updatedAt
       }
@@ -86,6 +156,12 @@ export const onCreateChoice = /* GraphQL */ `
         name
         email
         allocation
+        choice {
+          id
+          cost
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -103,6 +179,7 @@ export const onUpdateChoice = /* GraphQL */ `
         id
         name
         description
+        ein
         createdAt
         updatedAt
       }
@@ -111,6 +188,12 @@ export const onUpdateChoice = /* GraphQL */ `
         name
         email
         allocation
+        choice {
+          id
+          cost
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -128,6 +211,7 @@ export const onDeleteChoice = /* GraphQL */ `
         id
         name
         description
+        ein
         createdAt
         updatedAt
       }
@@ -136,6 +220,12 @@ export const onDeleteChoice = /* GraphQL */ `
         name
         email
         allocation
+        choice {
+          id
+          cost
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

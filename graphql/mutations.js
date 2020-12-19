@@ -10,6 +10,7 @@ export const createCharity = /* GraphQL */ `
       id
       name
       description
+      ein
       createdAt
       updatedAt
     }
@@ -24,6 +25,7 @@ export const updateCharity = /* GraphQL */ `
       id
       name
       description
+      ein
       createdAt
       updatedAt
     }
@@ -38,6 +40,7 @@ export const deleteCharity = /* GraphQL */ `
       id
       name
       description
+      ein
       createdAt
       updatedAt
     }
@@ -53,6 +56,28 @@ export const createPerson = /* GraphQL */ `
       name
       email
       allocation
+      choice {
+        id
+        charity {
+          id
+          name
+          description
+          ein
+          createdAt
+          updatedAt
+        }
+        person {
+          id
+          name
+          email
+          allocation
+          createdAt
+          updatedAt
+        }
+        cost
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -68,6 +93,28 @@ export const updatePerson = /* GraphQL */ `
       name
       email
       allocation
+      choice {
+        id
+        charity {
+          id
+          name
+          description
+          ein
+          createdAt
+          updatedAt
+        }
+        person {
+          id
+          name
+          email
+          allocation
+          createdAt
+          updatedAt
+        }
+        cost
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -83,6 +130,28 @@ export const deletePerson = /* GraphQL */ `
       name
       email
       allocation
+      choice {
+        id
+        charity {
+          id
+          name
+          description
+          ein
+          createdAt
+          updatedAt
+        }
+        person {
+          id
+          name
+          email
+          allocation
+          createdAt
+          updatedAt
+        }
+        cost
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -99,6 +168,7 @@ export const createChoice = /* GraphQL */ `
         id
         name
         description
+        ein
         createdAt
         updatedAt
       }
@@ -107,6 +177,12 @@ export const createChoice = /* GraphQL */ `
         name
         email
         allocation
+        choice {
+          id
+          cost
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -127,6 +203,7 @@ export const updateChoice = /* GraphQL */ `
         id
         name
         description
+        ein
         createdAt
         updatedAt
       }
@@ -135,6 +212,12 @@ export const updateChoice = /* GraphQL */ `
         name
         email
         allocation
+        choice {
+          id
+          cost
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -155,6 +238,7 @@ export const deleteChoice = /* GraphQL */ `
         id
         name
         description
+        ein
         createdAt
         updatedAt
       }
@@ -163,6 +247,12 @@ export const deleteChoice = /* GraphQL */ `
         name
         email
         allocation
+        choice {
+          id
+          cost
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

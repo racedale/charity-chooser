@@ -11,5 +11,18 @@
       "StackId": "arn:aws:cloudformation:us-east-2:382220085659:stack/amplify-charitychooser-dev-110631/8dac90a0-3d65-11eb-9bcc-0a35f9880d7e",
       "AmplifyAppId": "d3p41inthgwv5a"
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-charitychooser-prod-191155-authRole",
+      "UnauthRoleArn": "arn:aws:iam::382220085659:role/amplify-charitychooser-prod-191155-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::382220085659:role/amplify-charitychooser-prod-191155-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-charitychooser-prod-191155-deployment",
+      "UnauthRoleName": "amplify-charitychooser-prod-191155-unauthRole",
+      "StackName": "amplify-charitychooser-prod-191155",
+      "StackId": "arn:aws:cloudformation:us-east-2:382220085659:stack/amplify-charitychooser-prod-191155/84f45fa0-4329-11eb-969b-06fab7a3f890",
+      "AmplifyAppId": "d3p41inthgwv5a"
+    }
   }
 }

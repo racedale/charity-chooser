@@ -123,7 +123,7 @@ export default function Home(props) {
         />
         <form onSubmit={fetchPerson}>
           <FormControl>
-            <FormLabel color="white">Input voucher below:</FormLabel>
+            <FormLabel color="white">Input voucher code below:</FormLabel>
             <Grid templateColumns="8fr 2fr">
               <Input
                 placeholder="Press Enter to submit"
@@ -141,7 +141,7 @@ export default function Home(props) {
             <Heading>Welcome, {person.name}</Heading>
             <Text fontSize="2rem">
               You have <strong>${calcAmountLeft(person)}</strong> to donate
-              with. Please choose from the below chariies.
+              with. Please choose from the below options.
             </Text>
           </Box>
         )}
@@ -152,19 +152,24 @@ export default function Home(props) {
               templateColumns="1fr [first] 1fr [second] 1fr [third]"
               gap="1rem"
             >
-              {props.charities.map((charity) => (
-                <Charity
-                  key={charity.id}
-                  person={person}
-                  charity={charity}
-                  confirmFunc={confirmFunc(person)}
-                  loading={confirming}
-                  count={countChoices(choices, charity.id)}
-                ></Charity>
-              ))}
+              {props.charities
+                .sort((a, b) => (a.name > b.name ? 1 : -1))
+                .map((charity) => (
+                  <Charity
+                    key={charity.id}
+                    person={person}
+                    charity={charity}
+                    confirmFunc={confirmFunc(person)}
+                    loading={confirming}
+                    count={countChoices(choices, charity.id)}
+                  ></Charity>
+                ))}
             </Grid>
           </Accordion>
         )}
+        <Text color="white" textAlign="center">
+          Got feedback on how the site can be improved? Please send me an email
+        </Text>
         {/* <pre>{JSON.stringify(props.person, null, 2)}</pre> */}
       </main>
     </div>

@@ -3,9 +3,9 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "amplify env checkout dev && next dev",
     "build": "next build",
-    "deploy": "npm run build && npx serverless",
+    "deploy": "amplify env checkout prod && npm run build && npx serverless",
     "start": "next start"
   },
   "dependencies": {

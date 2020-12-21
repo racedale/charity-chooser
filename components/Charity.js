@@ -17,7 +17,7 @@ export const Charity = ({ person, charity, confirmFunc, loading, count }) => {
   return (
     <AccordionItem style={{ border: "none" }}>
       <AccordionButton
-        bg="green.500"
+        bg={charity.name.includes("VISA") ? "green.600" : "green.500"}
         minHeight="150px"
         ref={accordionButtonRef}
         flexDirection="column"
@@ -27,10 +27,10 @@ export const Charity = ({ person, charity, confirmFunc, loading, count }) => {
           <Heading as="h2" size="md">
             {charity.name}
           </Heading>
-          <Text fontSize="xs">EIN: {charity.ein}</Text>
+          {charity.ein && <Text fontSize="xs">EIN: {charity.ein}</Text>}
           <Text>{charity.description}</Text>
         </Box>
-        <Box color="white">
+        <Box color="gray.200">
           chosen <Badge colorScheme="green">{count}</Badge> times
         </Box>
       </AccordionButton>

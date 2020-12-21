@@ -19,7 +19,6 @@ import { API, graphqlOperation } from "@aws-amplify/api";
 import { Charity } from "@components/Charity";
 import { createChoice, updatePerson } from "graphql/mutations";
 import { getPerson, listChoices } from "graphql/queries";
-import { onCreateChoice } from "graphql/subscriptions";
 
 const calcAmountLeft = (person) => {
   if (person.choice) {
@@ -137,6 +136,7 @@ export default function Home(props) {
           color="white"
           fontSize="6rem"
           textAlign="center"
+          textShadow="2px 2px #111"
         />
         <form onSubmit={fetchPerson}>
           <FormControl>
@@ -157,8 +157,8 @@ export default function Home(props) {
 
         {person.id && (
           <Box color="white">
-            <Heading>Welcome, {person.name}</Heading>
-            <Text fontSize="2rem">
+            <Heading textShadow="1px 1px #111">Welcome, {person.name}</Heading>
+            <Text fontSize="2rem" textShadow="1px 1px #111">
               You have <strong>${calcAmountLeft(person)}</strong> to donate
               with. Please choose from the below options.
             </Text>

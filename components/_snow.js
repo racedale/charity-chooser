@@ -1,95 +1,117 @@
-// Snow from https://codepen.io/radum/pen/xICAB
-export function snow() {
-  let COUNT = 100;
-  let masthead = document.querySelector(".sky");
-  let canvas = document.createElement("canvas");
-  let ctx = canvas.getContext("2d");
-  let width = masthead.clientWidth;
-  let height = masthead.clientHeight;
-  let i = 0;
-  let active = false;
-
-  function onResize() {
-    width = masthead.clientWidth;
-    height = masthead.clientHeight;
-    canvas.width = width;
-    canvas.height = height;
-    ctx.fillStyle = "#FFF";
-
-    let wasActive = active;
-    active = width > 600;
-
-    if (!wasActive && active) requestAnimFrame(update);
-  }
-
-  let Snowflake = function () {
-    this.x = 0;
-    this.y = 0;
-    this.vy = 0;
-    this.vx = 0;
-    this.r = 0;
-
-    this.reset();
-  };
-
-  Snowflake.prototype.reset = function () {
-    this.x = Math.random() * width;
-    this.y = Math.random() * -height;
-    this.vy = 1 + Math.random() * 3;
-    this.vx = 0.5 - Math.random();
-    this.r = 1 + Math.random() * 2;
-    this.o = 0.5 + Math.random() * 0.5;
-  };
-
-  canvas.style.position = "absolute";
-  canvas.style.left = canvas.style.top = "0";
-
-  let snowflakes = [],
-    snowflake;
-  for (i = 0; i < COUNT; i++) {
-    snowflake = new Snowflake();
-    snowflake.reset();
-    snowflakes.push(snowflake);
-  }
-
-  function update() {
-    ctx.clearRect(0, 0, width, height);
-
-    if (!active) return;
-
-    for (i = 0; i < COUNT; i++) {
-      snowflake = snowflakes[i];
-      snowflake.y += snowflake.vy;
-      snowflake.x += snowflake.vx;
-
-      ctx.globalAlpha = snowflake.o;
-      ctx.beginPath();
-      ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
-      ctx.closePath();
-      ctx.fill();
-
-      if (snowflake.y > height) {
-        snowflake.reset();
-      }
-    }
-
-    requestAnimFrame(update);
-  }
-
-  // shim layer with setTimeout fallback
-  window.requestAnimFrame = (function () {
-    return (
+export function initSnow(window) {
+  (function () {
+    var requestAnimationFrame =
       window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
       function (callback) {
         window.setTimeout(callback, 1000 / 60);
-      }
-    );
+      };
+    window.requestAnimationFrame = requestAnimationFrame;
   })();
 
-  onResize();
-  window.addEventListener("resize", onResize, false);
+  var flakes = [],
+    canvas = document.getElementById("canvas"),
+    ctx = canvas.getContext("2d"),
+    flakeCount = 400,
+    mX = -100,
+    mY = -100;
 
-  masthead.appendChild(canvas);
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  function snow() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < flakeCount; i++) {
+      var flake = flakes[i],
+        x = mX,
+        y = mY,
+        minDist = 150,
+        x2 = flake.x,
+        y2 = flake.y;
+
+      var dist = Math.sqrt((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y)),
+        dx = x2 - x,
+        dy = y2 - y;
+
+      if (dist < minDist) {
+        var force = minDist / (dist * dist),
+          xcomp = (x - x2) / dist,
+          ycomp = (y - y2) / dist,
+          deltaV = force / 2;
+
+        flake.velX -= deltaV * xcomp;
+        flake.velY -= deltaV * ycomp;
+      } else {
+        flake.velX *= 0.98;
+        if (flake.velY <= flake.speed) {
+          flake.velY = flake.speed;
+        }
+        flake.velX += Math.cos((flake.step += 0.05)) * flake.stepSize;
+      }
+
+      ctx.fillStyle = "rgba(255,255,255," + flake.opacity + ")";
+      flake.y += flake.velY;
+      flake.x += flake.velX;
+
+      if (flake.y >= canvas.height || flake.y <= 0) {
+        reset(flake);
+      }
+
+      if (flake.x >= canvas.width || flake.x <= 0) {
+        reset(flake);
+      }
+
+      ctx.beginPath();
+      ctx.arc(flake.x, flake.y, flake.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(snow);
+  }
+
+  function reset(flake) {
+    flake.x = Math.floor(Math.random() * canvas.width);
+    flake.y = 0;
+    flake.size = Math.random() * 3 + 2;
+    flake.speed = Math.random() * 1 + 0.5;
+    flake.velY = flake.speed;
+    flake.velX = 0;
+    flake.opacity = Math.random() * 0.5 + 0.3;
+  }
+
+  function init(window) {
+    for (var i = 0; i < flakeCount; i++) {
+      var x = Math.floor(Math.random() * canvas.width),
+        y = Math.floor(Math.random() * canvas.height),
+        size = Math.random() * 3 + 2,
+        speed = Math.random() * 1 + 0.5,
+        opacity = Math.random() * 0.5 + 0.3;
+
+      flakes.push({
+        speed: speed,
+        velY: speed,
+        velX: 0,
+        x: x,
+        y: y,
+        size: size,
+        stepSize: Math.random() / 30,
+        step: 0,
+        opacity: opacity,
+      });
+    }
+
+    snow();
+  }
+
+  canvas.addEventListener("mousemove", function (e) {
+    (mX = e.clientX), (mY = e.clientY);
+  });
+
+  window.addEventListener("resize", function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+  init();
 }

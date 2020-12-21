@@ -14,7 +14,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import Header from "@components/Header";
-import { snow } from "../components/_snow";
+import { initSnow } from "../components/_snow";
 import { API, graphqlOperation } from "@aws-amplify/api";
 import { Charity } from "@components/Charity";
 import { createChoice, updatePerson } from "graphql/mutations";
@@ -91,24 +91,41 @@ export default function Home(props) {
   const fetchPerson = async (event) => {
     event.preventDefault();
 
-    const { data } = await API.graphql(
-      graphqlOperation(getPerson, {
-        id: personCode,
-      })
-    );
-    if (data.getPerson) {
-      setPerson(data.getPerson);
-    } else {
-      setPerson({});
+    try {
+      const { data } = await API.graphql(
+        graphqlOperation(getPerson, {
+          id: personCode,
+        })
+      );
+      if (data.getPerson) {
+        setPerson(data.getPerson);
+      } else {
+        toast({
+          title: "Error",
+          description: "Not Found",
+          status: "error",
+          duration: 9000,
+        });
+        setPerson({});
+      }
+    } catch (exception) {
+      toast({
+        title: "Error",
+        description: exception.errors[0].message,
+        status: "error",
+        duration: 9000,
+      });
     }
   };
 
   useEffect(() => {
-    snow();
+    if (process.browser) {
+      initSnow(window);
+    }
   }, []);
 
   return (
-    <div className="container sky">
+    <div className="container">
       <Head>
         <title>Charity Chooser</title>
         <link rel="icon" href="/favicon.ico" />
@@ -130,7 +147,9 @@ export default function Home(props) {
                 color="white"
                 onChange={(event) => setPersonCode(event.target.value)}
               />
-              <Button type="submit">Load</Button>
+              <Button type="submit" disabled={!personCode}>
+                Load
+              </Button>
             </Grid>
           </FormControl>
         </form>
@@ -172,6 +191,7 @@ export default function Home(props) {
         </Text>
         {/* <pre>{JSON.stringify(props.person, null, 2)}</pre> */}
       </main>
+      <canvas id="canvas"></canvas>
     </div>
   );
 }
